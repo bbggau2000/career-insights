@@ -3,19 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>職刻講經 | 香港最強 AI 履歷診斷</title>
+    <title>職刻講經 | 香港最強 AI 求職平台</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        /* 全局變數設定：方便日後一鍵改色 */
         :root {
-            --primary-color: #1E293B; /* 深邃藍 */
-            --accent-color: #3B82F6;  /* 亮眼藍 */
-            --bg-color: #F8FAFC;      /* 乾淨淺灰底色 */
+            --primary-color: #1E293B; 
+            --accent-color: #3B82F6;  
+            --bg-color: #F8FAFC;      
             --text-color: #334155;
             --card-bg: #FFFFFF;
         }
 
-        html { scroll-behavior: smooth; } /* 平滑捲動效果 */
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Noto Sans HK', sans-serif;
@@ -26,7 +25,6 @@
             line-height: 1.7;
         }
         
-        /* 導航欄 */
         header {
             background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -40,174 +38,154 @@
             align-items: center;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
-        .logo { font-size: 24px; font-weight: 900; color: var(--primary-color); letter-spacing: 1px; }
+        .logo { font-size: 24px; font-weight: 900; color: var(--primary-color); }
         .logo span { color: var(--accent-color); }
         
-        .header-btn {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            transition: 0.3s ease;
-        }
-        .header-btn:hover { background-color: var(--accent-color); transform: translateY(-2px); }
+        .nav-links { display: flex; gap: 20px; }
+        .nav-links a { color: var(--text-color); text-decoration: none; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--accent-color); }
 
-        /* 主視覺區 (Hero Section) */
         .hero {
             padding: 160px 5% 100px;
             text-align: center;
             background: linear-gradient(180deg, #E0F2FE 0%, var(--bg-color) 100%);
         }
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem); /* 標題按螢幕大小自動縮放 */
-            font-weight: 900;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
+        .hero img { max-width: 90%; width: 350px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1)); }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: var(--primary-color); margin-bottom: 20px; line-height: 1.2; }
         .hero h1 span { color: var(--accent-color); }
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            color: #64748B;
-        }
+        .hero p { font-size: 1.2rem; max-width: 600px; margin: 0 auto 40px; color: #64748B; }
 
-        /* 核心行動按鈕 */
+        /* 通用 Section 標題 */
+        .section-title { text-align: center; font-size: 2.2rem; color: var(--primary-color); margin-bottom: 40px; }
+        .section-title span { color: var(--accent-color); }
+
+        /* 關於我們區 */
+        .about-section { padding: 80px 5%; background-color: white; text-align: center; }
+        .about-content { max-width: 800px; margin: 0 auto; font-size: 1.1rem; color: #475569; }
+
+        /* AI 工具區 */
+        .tools-section { padding: 80px 5%; max-width: 1000px; margin: 0 auto; }
+        .tools-grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+        .tool-card {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            width: 400px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            text-align: center;
+            border-top: 5px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+        .tool-card:hover { transform: translateY(-5px); }
+        .tool-icon { font-size: 50px; margin-bottom: 15px; }
+        .tool-card h3 { font-size: 1.5rem; margin-bottom: 15px; }
+        .tool-card p { color: #64748B; margin-bottom: 25px; min-height: 80px; }
+        
         .cta-btn {
             display: inline-block;
             background-color: var(--accent-color);
             color: white;
-            padding: 18px 40px;
+            padding: 15px 30px;
             border-radius: 50px;
             text-decoration: none;
-            font-size: 1.2rem;
             font-weight: 700;
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
             transition: all 0.3s ease;
         }
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.5);
-        }
+        .cta-btn:hover { background-color: #2563EB; transform: translateY(-2px); }
+        .cta-btn.disabled { background-color: #CBD5E1; box-shadow: none; pointer-events: none; }
 
-        /* 特色功能卡片區 */
-        .features {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            padding: 60px 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .feature-card {
-            background-color: var(--card-bg);
-            padding: 40px 30px;
-            border-radius: 20px;
+        /* 內容文章區 */
+        .content-section { padding: 80px 5%; background-color: white; }
+        .content-grid { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; max-width: 1000px; margin: 0 auto; }
+        .article-card {
             width: 300px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            transition: all 0.3s ease;
-            border: 1px solid #F1F5F9;
-        }
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            border-color: #E2E8F0;
-        }
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-        .feature-card h3 { color: var(--primary-color); font-size: 1.3rem; margin-bottom: 15px; }
-        .feature-card p { color: #64748B; font-size: 1rem; }
-
-        /* 診斷表單區 */
-        .diagnosis-section {
-            padding: 80px 5%;
-            text-align: center;
-            background-color: white;
-        }
-        .diagnosis-section h2 {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-        .diagnosis-section p { color: #64748B; margin-bottom: 40px; }
-        
-        /* 裝 Google Form 的容器 */
-        .form-container {
-            max-width: 700px;
-            margin: 0 auto;
             background: var(--bg-color);
-            border-radius: 20px;
-            padding: 10px;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
-            overflow: hidden; /* 隱藏表單邊框 */
-        }
-        .form-container iframe {
-            width: 100%;
-            height: 850px;
-            border: none;
             border-radius: 15px;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: 0.3s;
         }
+        .article-card:hover { background: #E2E8F0; }
+        .article-tag { font-size: 0.8rem; color: var(--accent-color); font-weight: 700; margin-bottom: 10px; display: block; }
+        .article-card h4 { margin: 0 0 10px 0; font-size: 1.1rem; }
+        .article-card p { font-size: 0.9rem; color: #64748B; margin: 0; }
 
-        /* 頁腳 */
-        footer {
-            background-color: var(--primary-color);
-            color: #94A3B8;
-            text-align: center;
-            padding: 40px 20px;
-            font-size: 0.9rem;
-        }
+        footer { background-color: var(--primary-color); color: #94A3B8; text-align: center; padding: 40px 20px; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">職刻<span>講經</span></div>
-        <a href="#upload-cv" class="header-btn">免費診斷 CV</a>
+        <div class="nav-links">
+            <a href="#about">理念</a>
+            <a href="#tools">AI 神器</a>
+            <a href="#content">求職攻略</a>
+        </div>
     </header>
 
     <section class="hero">
-        <img src="CV2.png" alt="職刻講經主視覺" style="max-width: 90%; width: 350px; height: auto; margin-bottom: 20px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));">
-        
-        <h1>AI 履歷診斷<br><span>秒速找出 CV 盲點</span></h1>
-        <p>專為香港職場新鮮人而設。唔知份 CV 點寫先過到 HR 嗰關？交畀 AI 幫你做深度分析，即刻提升面試機會！</p>
-        <a href="#upload-cv" class="cta-btn">🚀 立即上傳 PDF</a>
+        <img src="CV2.png" alt="職刻講經主視覺">
+        <h1>AI 職涯教練<br><span>由 CV 到 面試 幫你拆解</span></h1>
+        <p>專為香港職場新人而設嘅一站式求職平台。唔想做炮灰？交畀 AI 幫你做深度分析，即刻提升 Offer 命中率！</p>
+        <a href="#tools" class="cta-btn">👇 選擇 AI 工具</a>
     </section>
 
-    <section class="features">
-        <div class="feature-card">
-            <div class="feature-icon">🎯</div>
-            <h3>港式 HR 毒舌點評</h3>
-            <p>拒絕廢話！模擬香港真實 Headhunter 語氣，直接指出你 CV 嘅致命傷同扣分位。</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">✨</div>
-            <h3>Action Verbs 升級</h3>
-            <p>揪出太口語或累贅嘅字句，教你用最強嘅字眼重新包裝你嘅工作經驗。</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon">⚡</div>
-            <h3>極速 Email 報告</h3>
-            <p>全自動化運作，幾分鐘內將排版精美嘅詳細評分與修改建議發送到你 Inbox。</p>
+    <section id="about" class="about-section">
+        <h2 class="section-title">點解要有<span>職刻講經？</span></h2>
+        <div class="about-content">
+            <p>每年有成千上萬嘅 Fresh Grad 湧入職場，但學校從來無教過點樣寫一份真正吸睛嘅 CV，更加無教過點樣應付 HR 嘅刁鑽問題。好多有料嘅後生仔，就係因為「唔識包裝」而連面試機會都無。</p>
+            <p><strong>職刻講經</strong> 嘅誕生，就係為咗打破呢個資訊差。我哋結合最頂尖嘅 AI 技術同香港真實職場經驗，為你提供一針見血、即學即用嘅求職策略。由零到一，陪你拆解職場迷思。</p>
         </div>
     </section>
 
-    <section id="upload-cv" class="diagnosis-section">
-        <h2>準備好接受 AI 嘅毒舌洗禮未？</h2>
-        <p>點擊下方按鈕，前往專屬加密通道上傳你的 PDF 履歷。</p>
-        
-        <div class="form-container" style="background: transparent; box-shadow: none; padding: 40px 0; height: auto;">
-            <a href="https://forms.gle/Qdbz6V7XAK1sUePx5" target="_blank" class="cta-btn" style="font-size: 1.3rem; padding: 20px 50px; display: inline-flex; align-items: center; gap: 10px;">
-                <span style="font-size: 1.5rem;">📂</span> 前往安全通道上傳 CV
+    <section id="tools" class="tools-section">
+        <h2 class="section-title">你的專屬 <span>AI 神器</span></h2>
+        <div class="tools-grid">
+            
+            <div class="tool-card">
+                <div class="tool-icon">📄</div>
+                <h3>AI 履歷毒舌診斷</h3>
+                <p>上傳你的 PDF 履歷，AI 會模擬真實 Headhunter 語氣，揪出致命傷，並提供 Action Verbs 升級建議。</p>
+                <a href="https://forms.gle/iXJSEZEfNZSBeKb99" target="_blank" class="cta-btn">立即診斷 CV</a>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🎯</div>
+                <h3>AI 面試神預測</h3>
+                <p>貼上你想 Apply 嘅 Job Description (JD)，AI 即刻幫你 Gen 出最有可能問嘅 5 條辣手問題同標準答案框架。</p>
+                <a href="#" class="cta-btn disabled">即將推出 Coming Soon</a>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="content" class="content-section">
+        <h2 class="section-title">實用<span>求職乾貨</span></h2>
+        <div class="tools-grid content-grid">
+            <a href="#" class="article-card">
+                <span class="article-tag">CV 攻略</span>
+                <h4>HR 爆料：9成 Fresh Grad CV 都中嘅 3 個伏位</h4>
+                <p>點解你份 CV 經常石沉大海？可能你已經犯咗呢幾個致命錯誤...</p>
             </a>
-            <p style="font-size: 0.85rem; color: #94A3B8; margin-top: 20px;">
-                * 系統會開新視窗跳轉至 Google Form 系統<br>確保你的個人檔案獲得最高級別加密保護
-            </p>
+            <a href="#" class="article-card">
+                <span class="article-tag">面試技巧</span>
+                <h4>「你有咩優缺點？」3個萬用拆彈公式</h4>
+                <p>面對呢條必答題，點樣答先唔會顯得太假，又可以突顯自己價值？</p>
+            </a>
+            <a href="#" class="article-card">
+                <span class="article-tag">職場心理</span>
+                <h4>大公司 VS 初創公司？新鮮人應該點揀？</h4>
+                <p>第一份工決定你嘅起跑線。深度分析兩者利弊，幫你搵出最適合嘅路。</p>
+            </a>
         </div>
     </section>
+
+    <footer>
+        <p>&copy; 2026 職刻講經 Career Insights. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
