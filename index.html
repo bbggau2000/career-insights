@@ -3,93 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>職刻講經 | 專屬職場新鮮人的 AI 履歷診斷</title>
+    <title>職刻講經 | 香港最強 AI 履歷診斷</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+HK:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        /* 網站整體字體與顏色設定 */
+        /* 全局變數設定：方便日後一鍵改色 */
+        :root {
+            --primary-color: #1E293B; /* 深邃藍 */
+            --accent-color: #3B82F6;  /* 亮眼藍 */
+            --bg-color: #F8FAFC;      /* 乾淨淺灰底色 */
+            --text-color: #334155;
+            --card-bg: #FFFFFF;
+        }
+
+        html { scroll-behavior: smooth; } /* 平滑捲動效果 */
+
         body {
-            font-family: 'Helvetica Neue', Arial, 'Microsoft JhengHei', sans-serif;
+            font-family: 'Noto Sans HK', sans-serif;
             margin: 0;
             padding: 0;
-            color: #333;
-            background-color: #f9fbfc;
-            line-height: 1.6;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
         }
         
-        /* 頂部導航欄 */
+        /* 導航欄 */
         header {
-            background-color: #ffffff;
-            padding: 20px 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 5%;
+            position: fixed;
+            width: 90%;
+            top: 0;
+            z-index: 1000;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
-        .logo { font-size: 24px; font-weight: bold; color: #2c3e50; }
-        .logo span { color: #3498db; } /* 講經兩字用藍色突顯 */
+        .logo { font-size: 24px; font-weight: 900; color: var(--primary-color); letter-spacing: 1px; }
+        .logo span { color: var(--accent-color); }
         
+        .header-btn {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: 0.3s ease;
+        }
+        .header-btn:hover { background-color: var(--accent-color); transform: translateY(-2px); }
+
         /* 主視覺區 (Hero Section) */
         .hero {
+            padding: 160px 5% 100px;
             text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-            color: #2c3e50;
+            background: linear-gradient(180deg, #E0F2FE 0%, var(--bg-color) 100%);
         }
-        .hero h1 { font-size: 3em; margin-bottom: 10px; }
-        .hero p { font-size: 1.2em; max-width: 600px; margin: 0 auto 30px auto; color: #444; }
-        
-        /* 行動呼籲按鈕 */
-        .cta-button {
-            background-color: #2c3e50;
-            color: #ffffff;
-            padding: 15px 30px;
-            text-decoration: none;
-            font-size: 1.2em;
-            border-radius: 30px;
-            font-weight: bold;
-            transition: 0.3s;
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem); /* 標題按螢幕大小自動縮放 */
+            font-weight: 900;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            line-height: 1.2;
         }
-        .cta-button:hover { background-color: #3498db; }
+        .hero h1 span { color: var(--accent-color); }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: #64748B;
+        }
 
-        /* 特色功能介紹區 */
+        /* 核心行動按鈕 */
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+            transition: all 0.3s ease;
+        }
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.5);
+        }
+
+        /* 特色功能卡片區 */
         .features {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            padding: 60px 20px;
-            flex-wrap: wrap; /* 讓手機版可以自動排位 */
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 60px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .feature-card {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 10px;
-            width: 280px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            background-color: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 20px;
+            width: 300px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+            border: 1px solid #F1F5F9;
         }
-        .feature-icon { font-size: 40px; margin-bottom: 15px; }
-        
-        /* AI 診斷上傳區 (預留給 Google Form) */
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-color: #E2E8F0;
+        }
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .feature-card h3 { color: var(--primary-color); font-size: 1.3rem; margin-bottom: 15px; }
+        .feature-card p { color: #64748B; font-size: 1rem; }
+
+        /* 診斷表單區 */
         .diagnosis-section {
+            padding: 80px 5%;
             text-align: center;
-            padding: 60px 20px;
-            background-color: #ffffff;
+            background-color: white;
         }
-        .form-placeholder {
-            border: 2px dashed #bdc3c7;
-            padding: 40px;
-            max-width: 600px;
-            margin: 20px auto;
-            border-radius: 10px;
-            color: #7f8c8d;
+        .diagnosis-section h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .diagnosis-section p { color: #64748B; margin-bottom: 40px; }
+        
+        /* 裝 Google Form 的容器 */
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--bg-color);
+            border-radius: 20px;
+            padding: 10px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            overflow: hidden; /* 隱藏表單邊框 */
+        }
+        .form-container iframe {
+            width: 100%;
+            height: 850px;
+            border: none;
+            border-radius: 15px;
         }
 
         /* 頁腳 */
         footer {
+            background-color: var(--primary-color);
+            color: #94A3B8;
             text-align: center;
-            padding: 20px;
-            background-color: #2c3e50;
-            color: #ffffff;
-            font-size: 0.9em;
+            padding: 40px 20px;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -97,48 +169,43 @@
 
     <header>
         <div class="logo">職刻<span>講經</span></div>
-        <nav>
-            <a href="#diagnosis" class="cta-button" style="padding: 10px 20px; font-size: 1em;">免費診斷 CV</a>
-        </nav>
+        <a href="#upload-cv" class="header-btn">免費診斷 CV</a>
     </header>
 
     <section class="hero">
-        <h1>AI 履歷診斷，秒速找出 CV 盲點！</h1>
-        <p>專為職場新鮮人而設。唔知份 CV 點寫先吸引到 HR？交畀 AI 幫你做深度分析，即刻提升面試機會。</p>
-        <a href="#diagnosis" class="cta-button">🚀 立即上傳履歷</a>
+        <h1>AI 履歷診斷<br><span>秒速找出 CV 盲點</span></h1>
+        <p>專為香港職場新鮮人而設。唔知份 CV 點寫先過到 HR 嗰關？交畀 AI 幫你做深度分析，即刻提升面試機會！</p>
+        <a href="#upload-cv" class="cta-btn">🚀 立即上傳 PDF</a>
     </section>
 
     <section class="features">
         <div class="feature-card">
             <div class="feature-icon">🎯</div>
-            <h3>精準關鍵字匹配</h3>
-            <p>分析你的 CV 是否包含行業熱門字眼，過到大公司的 ATS 篩選系統。</p>
+            <h3>港式 HR 毒舌點評</h3>
+            <p>拒絕廢話！模擬香港真實 Headhunter 語氣，直接指出你 CV 嘅致命傷同扣分位。</p>
         </div>
         <div class="feature-card">
-            <div class="feature-icon">✍️</div>
-            <h3>專業語氣修飾</h3>
-            <p>揪出太口語或累贅的字句，教你用最強的 Action Verbs 寫出戰績。</p>
+            <div class="feature-icon">✨</div>
+            <h3>Action Verbs 升級</h3>
+            <p>揪出太口語或累贅嘅字句，教你用最強嘅字眼重新包裝你嘅工作經驗。</p>
         </div>
         <div class="feature-card">
             <div class="feature-icon">⚡</div>
-            <h3>極速報告生成</h3>
-            <p>無需等待，幾分鐘內將詳細評分與修改建議發送到你的 Email。</p>
+            <h3>極速 Email 報告</h3>
+            <p>全自動化運作，幾分鐘內將排版精美嘅詳細評分與修改建議發送到你 Inbox。</p>
         </div>
     </section>
 
-    <section id="diagnosis" class="diagnosis-section">
-        <h2>開始你的 AI 履歷診斷</h2>
-        <p>請在下方貼上你的履歷文字，我們將為你進行全方位分析。</p>
+    <section id="upload-cv" class="diagnosis-section">
+        <h2>準備好接受 AI 嘅毒舌洗禮未？</h2>
+        <p>點擊下方按鈕，前往專屬加密通道上傳你的 PDF 履歷。</p>
         
-        <div class="form-placeholder">
-            <p>【此處預留給 Google Form 收集履歷資料】</p>
-            <p><i>稍後我哋會教你點樣將表單嵌入嚟呢度！</i></p>
+        <div class="form-container" style="background: transparent; box-shadow: none; padding: 40px 0; height: auto;">
+            <a href="https://forms.gle/Qdbz6V7XAK1sUePx5" target="_blank" class="cta-btn" style="font-size: 1.3rem; padding: 20px 50px; display: inline-flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.5rem;">📂</span> 前往安全通道上傳 CV
+            </a>
+            <p style="font-size: 0.85rem; color: #94A3B8; margin-top: 20px;">
+                * 系統會開新視窗跳轉至 Google Form 系統<br>確保你的個人檔案獲得最高級別加密保護
+            </p>
         </div>
     </section>
-
-    <footer>
-        <p>&copy; 2026 職刻講經 Career Insights. All rights reserved.</p>
-    </footer>
-
-</body>
-</html>
